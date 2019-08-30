@@ -2,29 +2,19 @@
 #include "Nodo.h"
 using namespace std;
 
-/* crea una referencia - tipo definido */
-typedef char Dato;
+typedef std::string Dato;
 
-class Lista{	
-	/* Modicaderes de acceso de seguridad 
-		(herencia)
-	   protected- Protejido
-	   Public	- publico
-	   Private	- privado
-	*/
-	protected:
-		/* va tener la referencia para indicar a quien apunta */	
+class Lista{
+	protected:	
 		Nodo* primero;
 	
 	public:
-		/**/
 		Lista(){};
 		void crearlista();
-		void insertarcabezalista(Dato entrada);
+		void insertarinicio(Dato entrada);
 		void visualizar();
 		Nodo* ultimo();
 		Nodo* buscarlista(Dato destino);
-		void insertarlista(Nodo* anterior, Dato entrada);
 		void insertarultimo(Dato entrada);
 		void eliminar(Dato entrada);
 		
@@ -34,14 +24,16 @@ void Lista::crearlista(){
 	primero=0;	
 }
 
-void Lista::insertarcabezalista(Dato entrada){
+void Lista::insertarinicio(Dato entrada){
+	Nodo* buscarnodo = this->buscarlista(entrada); 
 	Nodo* nuevo;
-	nuevo = new Nodo(entrada);
-
-	/*  */
-	nuevo->ponerenlace(primero);
-	/* enlasa al nuevo nodo */
-	primero = nuevo;
+	
+	if (buscarnodo==NULL){
+		nuevo = new Nodo(entrada);
+		nuevo->ponerenlace(primero);
+		primero = nuevo;		
+	}
+	
 }
 
 Nodo* Lista::ultimo(){
@@ -62,11 +54,13 @@ Nodo* Lista::buscarlista(Dato destino){
 }
 
 void Lista::insertarultimo(Dato entrada){
+	Nodo* buscarnodo =  this->buscarlista(entrada);
 	Nodo* ultimo = this->ultimo();
+	Nodo* nodo = new Nodo(entrada);	
 	
-	Nodo* nodo = new Nodo(entrada);
-	
-	ultimo->ponerenlace(nodo);
+	if (buscarnodo==NULL){
+		ultimo->ponerenlace(nodo);	
+	}
 	
 }
 
