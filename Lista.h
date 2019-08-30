@@ -32,6 +32,8 @@ void Lista::insertarinicio(Dato entrada){
 		nuevo = new Nodo(entrada);
 		nuevo->ponerenlace(primero);
 		primero = nuevo;		
+	}else{
+		cout << entrada << " ya se encuentra en la lista" << endl;
 	}
 	
 }
@@ -60,6 +62,8 @@ void Lista::insertarultimo(Dato entrada){
 	
 	if (buscarnodo==NULL){
 		ultimo->ponerenlace(nodo);	
+	}else{
+		cout << entrada << " ya se encuentra en la lista" << endl;
 	}
 	
 }
